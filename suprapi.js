@@ -3,6 +3,7 @@
 
 //	ENiGMA½
 const MenuModule = require('../../core/menu_module.js').MenuModule;
+const events = require('../../core/events.js');
 
 //	deps
 const http = require('http');
@@ -13,6 +14,13 @@ exports.moduleInfo = {
 	author: 'snazzware',
 	packageName: 'com.snazzware.enigma-bbs-suprapi'
 };
+
+exports.registerEvents = function() {
+    events.on('codes.l33t.enigma.system.connect', function(args) {
+        console.info('connect event received!');
+        console.info('term is '+args.client.term.env.TERM+' at '+args.client.term.env.COLUMNS+'x'+args.client.term.env.ROWS);
+    });
+}
 
 exports.getModule = class SupraPiModule extends MenuModule {
 	constructor(options) {
